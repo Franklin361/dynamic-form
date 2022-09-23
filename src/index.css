@@ -1,70 +1,113 @@
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat';
 }
 
 body {
-  margin: 0;
+  background: #2C3639;
+  color: #EDEDED;
+}
+
+.container {
+  user-select: none;
+}
+
+.title {
+  text-align: center;
+  font-size: 4em;
+  font-weight: 900;
+  margin: .2em 0;
+}
+
+form {
+  max-width: 500px;
+  margin: 1em auto;
+  padding: 1.5em;
+  border-radius: 7px;
+  border: 1px solid black;
+  box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.808);
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  /* gap: 1.5em; */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  padding: 10px;
+  border-radius: 5px;
+  flex: 1;
+  background: #FFFFFF;
+  border: 2px solid black;
+  outline: none;
+  margin: 10px 0;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus {
+  border-color: #F73D93;
+}
+
+select {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  accent-color: #F73D93;
+}
+
+form>div {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+form>div>label {
+  font-weight: bold;
+}
+
+form>label {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1em;
+  width: fit-content;
+  margin: 1em 0;
+}
+
+form>button {
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: #F73D93;
+  border: 1px solid black;
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  transition: all .2s ease;
+}
+
+form>button:hover {
+  opacity: 0.8;
+}
+
+form>button:active {
+  transform: scale(.98);
+}
+
+.error {
+  color: #E94560;
+  font-weight: bold;
+  display: block;
+  text-align: right;
 }
