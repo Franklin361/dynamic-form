@@ -60,7 +60,23 @@ select {
   cursor: pointer;
 }
 
-input[type="checkbox"] {
+.radio-group {
+  margin: .5em 0;
+  font-size: 1em;
+}
+
+.radio-group>label {
+  display: flex;
+  gap: .5em;
+}
+
+.radio-group>label,
+.radio-group>label>input {
+  cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
   accent-color: #F73D93;
 }
 

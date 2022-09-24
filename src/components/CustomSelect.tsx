@@ -1,19 +1,21 @@
 import { ErrorMessage, useField } from "formik"
 
 interface Props {
+    label: string;
     name: string;
-    type?: 'text' | 'password' | 'email' | string;
-    placeholder?: string;
     [x: string]: any
 }
 
-export const CustomTextInput = ({ label, ...props }: Props) => {
-
+export const CustomSelect = ({ label, ...props }: Props) => {
     const [field] = useField(props)
 
     return (
         <>
-            <input {...field} {...props} />
+
+            <div>
+                <label htmlFor={props.name || props.id}>{label}</label>
+                <select {...field} {...props} />
+            </div>
             <ErrorMessage name={props.name} component="span" className="error" />
         </>
     )
