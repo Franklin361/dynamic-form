@@ -1,7 +1,6 @@
 import { Form, Formik } from "formik"
-import { CustomCheckBox, CustomRadioGroup, CustomTextInput, Layout } from "../components"
+import { CustomCheckBox, CustomRadioGroup, CustomTextInput, CustomSelect, Layout } from "../components"
 import { getInputs } from "../utils"
-import { CustomSelect } from '../components/CustomSelect';
 
 const { initialValues, inputs, validationSchema } = getInputs('login')
 
@@ -17,38 +16,42 @@ export const FormikDynamic = () => {
                     () => (
                         <Form noValidate>
                             {
-                                inputs.map(({ ...props }) => {
-                                    switch (props.type) {
+                                inputs.map(({ name, type, value, ...props }) => {
+                                    switch (type) {
                                         case "select":
-                                            return <CustomSelect key={props.name} label={props.label!} name={props.name} className="select_input">
-                                                <option value="">--- Selecciona una opción ---</option>
-                                                {
-                                                    props.options?.map(({ id, desc }) => (<option value={id} key={id}>{desc}</option>))
-                                                }
-                                            </CustomSelect>
+                                            return <CustomSelect
+                                                key={name}
+                                                label={props.label!}
+                                                name={name}
+                                                options={props.options!}
+                                            />
 
                                         case "radio-group":
-                                            return <CustomRadioGroup label={props.label!} name={props.name} options={props.options as any} key={props.name} />
+                                            return <CustomRadioGroup
+                                                label={props.label!}
+                                                name={name}
+                                                options={props.options!}
+                                                key={name} />
 
                                         case "checkbox":
                                             return <CustomCheckBox
                                                 label={props.label!}
-                                                key={props.name}
-                                                name={props.name}
+                                                key={name}
+                                                name={name}
                                             />
 
                                         default:
                                             return <CustomTextInput
-                                                key={props.name}
-                                                name={props.name}
+                                                key={name}
+                                                name={name}
                                                 placeholder={props.placeholder}
-                                                type={props.type as any}
+                                                type={type}
                                             />
                                     }
                                 })
                             }
 
-                            <button className="btn btn_submit" type="submit">Ingresar</button>
+                            <button className="btn btn_submit" type="submit">Submit</button>
                         </Form>
                     )
                 }

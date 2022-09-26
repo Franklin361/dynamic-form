@@ -1,59 +1,49 @@
 import * as Yup from "yup";
-import { forms } from './forms';
+import { AnyObject } from "yup/lib/types";
+import { forms, InputProps } from './forms';
+
+type YupBoolean = Yup.BooleanSchema<boolean | undefined, AnyObject, boolean | undefined>
+type YupString = Yup.StringSchema<string | undefined, AnyObject, string | undefined>
+
+const generateValidations = (field: InputProps) => {
+
+    let schema = Yup[field.typeValue ? field.typeValue : 'string']()
+
+    for (const rule of field.validations) {
+        switch (rule.type) {
+            case 'isTrue': schema = (schema as YupBoolean).isTrue(rule.message); break;
+            case 'isEmail': schema = (schema as YupString).email(rule.message); break;
+            case 'minLength': schema = (schema as YupString).min(rule?.value as number, rule.message); break;
+            default: schema = schema.required(rule.message); break;
+        }
+    }
+
+    return schema
+}
 
 type Form = 'login'
 
 export const getInputs = (section: Form) => {
+
     let initialValues: { [key: string]: any } = {};
-    let requiredFields: { [key: string]: any } = {};
+
+    let validationsFields: { [key: string]: any } = {};
 
     for (const field of forms[section]) {
+
         initialValues[field.name] = field.value;
 
         if (!field.validations) continue;
 
-        let schema = field?.typeValue === 'boolean' ? Yup.boolean() : Yup.string();
+        const schema = generateValidations(field)
 
-        for (const rule of field.validations) {
-
-            const ruleValidation = rule as { type: string, message: string }
-
-            if (ruleValidation.type === 'isTrue') {
-                schema = (schema as Yup.BooleanSchema<boolean>).isTrue(ruleValidation.message)
-            }
-
-            if (ruleValidation.type === 'oneOf') {
-                schema = (schema as Yup.StringSchema<string>).oneOf([Yup.ref((ruleValidation as any).ref), null], ruleValidation.message)
-            }
-            if (ruleValidation.type === "required") {
-                schema = schema.required(ruleValidation.message);
-            }
-
-            if (ruleValidation.type === "minLength") {
-                schema = (schema as Yup.StringSchema<string>).min(
-                    (ruleValidation as any).value,
-                    ruleValidation.message
-                );
-            }
-
-            if (ruleValidation.type === "maxLength") {
-                schema = (schema as Yup.StringSchema<string>).max(
-                    (ruleValidation as any).value,
-                    ruleValidation.message
-                );
-            }
-
-            if (ruleValidation.type === "email") {
-                schema = (schema as Yup.StringSchema<string>).email(ruleValidation.message);
-            }
-        }
-
-        requiredFields[field.name] = schema;
+        validationsFields[field.name] = schema;
     }
 
     return {
-        validationSchema: Yup.object({ ...requiredFields }),
+        validationSchema: Yup.object({ ...validationsFields }),
         initialValues,
-        inputs: [...forms[section]],
+        inputs: forms[section],
     };
+
 };

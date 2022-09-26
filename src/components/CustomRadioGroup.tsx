@@ -1,6 +1,6 @@
 import { useField, ErrorMessage } from 'formik';
 
-type Opt = { id: number, value: string, desc: string }
+type Opt = { value: string | number, desc: string }
 
 interface Props {
     options: Opt[]
@@ -17,9 +17,10 @@ export const CustomRadioGroup = ({ label, options, ...props }: Props) => {
             <b>{label}</b>
             {
                 options.map(opt => (
-                    <label key={opt.id}>
+                    <label key={opt.value}>
                         <input
                             {...field}
+                            {...props}
                             type="radio"
                             checked={opt.value === field.value}
                             value={opt.value}

@@ -3,8 +3,8 @@ import { FormikBasic, FormikDynamic } from "./pages"
 const App = () => {
   return (
     <>
-      <FormikBasic />
-      {/* <FormikDynamic /> */}
+      {/* <FormikBasic /> */}
+      <FormikDynamic />
     </>
   )
 }

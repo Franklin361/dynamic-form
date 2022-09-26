@@ -2,12 +2,12 @@ import { ErrorMessage, useField } from "formik"
 
 interface Props {
     name: string;
-    type?: 'text' | 'password' | 'email' | string;
+    type: string;
     placeholder?: string;
     [x: string]: any
 }
 
-export const CustomTextInput = ({ label, ...props }: Props) => {
+export const CustomTextInput = (props: Props) => {
 
     const [field] = useField(props)
 

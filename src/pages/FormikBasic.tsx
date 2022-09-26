@@ -22,7 +22,7 @@ export const FormikBasic = () => {
             gender: Yup.string().required('Required'),
         }),
         onSubmit: values => {
-            alert(JSON.stringify(values))
+            // TODO: some action
         }
     });
 
@@ -79,7 +79,7 @@ export const FormikBasic = () => {
                             checked={getFieldProps('gender').value === 'women'}
                             value='women'
                         />
-                        Women
+                        Woman
                     </label>
                     <label >
                         <input type="radio"

@@ -7,13 +7,13 @@ interface Props {
 }
 
 
-export const CustomCheckBox = ({ label, ...props }: Props) => {
-    const [field] = useField({ ...props, type: 'checkbox' })
+export const CustomCheckBox = (props: Props) => {
+    const [field] = useField(props)
 
     return (
         <label className="label_check">
             <input type="checkbox" {...field} {...props} />
-            <span>{label}</span>
+            <span>{props.label}</span>
             <ErrorMessage name={props.name} component="span" className="error" />
         </label>
     )

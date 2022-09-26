@@ -1,119 +1,141 @@
-export const forms =
+
+export interface InputProps {
+    type: 'text' | 'radio-group' | 'email' | 'password' | 'select' | 'checkbox'
+    name: string
+    value: string | number | boolean
+    validations: Validation[]
+    placeholder?: string
+    typeValue?: 'string' | 'boolean'
+    label?: string
+    options?: Opt[]
+}
+
+export interface Opt {
+    value: string | number
+    desc: string
+}
+
+export interface Validation {
+    type: 'required' | 'isEmail' | 'minLength' | 'isTrue'
+    value?: string | number | boolean
+    message: string
+}
+
+export const forms: { [x: string]: InputProps[] } =
 {
-    "login": [
+    login: [
         {
-            "type": "text",
-            "name": "name",
-            "placeholder": "Full Name",
-            "value": "",
-            "validations": [
+            type: "text",
+            name: "name",
+            placeholder: "Full Name",
+            value: "",
+            validations: [
                 {
-                    "type": "minLength",
-                    "value": 3,
-                    "message": "Min. 3 characters",
+                    type: "minLength",
+                    value: 3,
+                    message: "Min. 3 characters",
                 },
                 {
-                    "type": "required",
+                    type: "required",
+                    message: "Full Name is required"
                 },
             ],
 
         },
         {
-            "type": "email",
-            "name": "email",
-            "placeholder": "example@example.com",
-
-            "value": "",
-            "validations": [
+            type: "email",
+            name: "email",
+            placeholder: "E-mail",
+            value: "",
+            validations: [
                 {
-                    "type": "required",
-                    "message": "Email is required"
+                    type: "required",
+                    message: "Email is required"
                 },
                 {
-                    "type": "email",
-                    "message": "Email no valid"
+                    type: "isEmail",
+                    message: "Email no valid"
                 }
             ],
 
         },
         {
-            "type": "password",
-            "name": "password",
-            "placeholder": "************",
-
-            "value": "",
-            "validations": [
+            type: "password",
+            name: "password",
+            placeholder: "Password",
+            value: "",
+            validations: [
                 {
-                    "type": "required",
-                    "message": "Password is required"
+                    type: "required",
+                    message: "Password is required"
                 }
             ],
 
         },
         {
-            "type": "radio-group",
-            "name": "gender",
-            "label": "Gender: ",
-            "value": "",
-            "options": [
+            type: "select",
+            name: "rol",
+            label: "Select an option: ",
+            value: "",
+            options: [
                 {
-                    "id": 1,
-                    "value": "man",
-                    "desc": "Man"
+                    value: "admin",
+                    desc: "Admin",
                 },
                 {
-                    "id": 2,
-                    "value": "woman",
-                    "desc": "Woman"
+                    value: "user",
+                    desc: "User"
                 },
                 {
-                    "id": 3,
-                    "value": "other",
-                    "desc": "Other"
-                },
+                    value: "super-admin",
+                    desc: "Super Admin"
+                }
             ],
-            "validations": [
+            validations: [
                 {
-                    "type": "required"
+                    type: "required",
+                    message: "Rol is required"
                 }
             ]
         },
         {
-            "type": "select",
-            "name": "rol",
-            "label": "Select an option: ",
-            "value": "",
-            "options": [
+            type: "radio-group",
+            name: "gender",
+            label: "Gender: ",
+            value: "",
+            options: [
                 {
-                    "id": "admin",
-                    "desc": "Admin"
+                    value: 'man',
+                    desc: "Man"
                 },
                 {
-                    "id": "user",
-                    "desc": "User"
+
+                    value: "woman",
+                    desc: "Woman"
                 },
                 {
-                    "id": "super-admin",
-                    "desc": "Super Admin"
-                }
+
+                    value: "other",
+                    desc: "Other"
+                },
             ],
-            "validations": [
+            validations: [
                 {
-                    "type": "required"
+                    type: "required",
+                    message: "Gender is required"
                 }
             ]
         },
-
         {
-            "type": "checkbox",
-            "name": "terms",
-            "typeValue": "boolean",
-            "label": "Terms and Conditions",
-            "value": false,
-            "validations": [
+            type: "checkbox",
+            name: "terms",
+            typeValue: "boolean",
+            label: "Terms and Conditions",
+            value: false,
+            validations: [
                 {
-                    "type": "isTrue",
-                    "message": "You must accept the terms!"
+                    type: "isTrue",
+                    message: "Accept the terms!"
                 }
             ]
         },
