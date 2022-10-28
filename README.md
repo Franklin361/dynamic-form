@@ -1,4 +1,4 @@
-# Formularios dinámicos con Formik y React JS. 📝
+# Dynamic forms with Formik and React JS. 📝
 
 This time, we are going to create dynamic forms using React JS and Formik!
 
