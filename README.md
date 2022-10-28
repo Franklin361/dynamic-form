@@ -50,6 +50,6 @@ This time, we are going to create dynamic forms using React JS and Formik!
 
 ### Here's the link to the tutorial in case you'd like to take a look at it! eyes 👀
 
-- 🇲🇽 🔗 
+- 🇲🇽 🔗 https://dev.to/franklin030601/formularios-dinamicos-con-formik-y-react-js-4hne
 
-- 🇺🇲 🔗 
+- 🇺🇲 🔗 https://dev.to/franklin030601/dynamic-forms-with-formik-and-react-js-3no1
